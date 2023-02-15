@@ -1,6 +1,5 @@
 """
 Account API Service Test Suite
-
 Test cases can be run with the following:
   nosetests -v --with-spec --spec-color
   coverage report -m
@@ -66,7 +65,7 @@ class TestAccountService(TestCase):
         }
         for key, value in headers.items():
             self.assertEqual(response.headers.get(key), value)
-    
+
     def test_cors_security(self):
         """It should return a CORS header"""
         response = self.client.get('/', environ_overrides=HTTPS_ENVIRON)
@@ -161,8 +160,8 @@ class TestAccountService(TestCase):
         data = resp.get_json()
         # assert that data["name"] equals the account.name
         self.assertEqual(data["name"], account.name)
-    
-    #Create a test case called test_account_not_found(self).
+
+    # Create a test case called test_account_not_found(self).
     def test_get_account_not_found(self):
         """It should not Read an Account that is not found"""
         # send a self.client.get() request to the BASE_URL with an invalid account number (e.g., 0)
@@ -204,7 +203,7 @@ class TestAccountService(TestCase):
         updated_account = resp.get_json()
         # assert that the updated_account["name"] is whatever you changed it to
         self.assertEqual(updated_account["name"], "Something Known")
-    
+
     def test_delete_account(self):
         """It should Delete an Account"""
         account = self._create_accounts(1)[0]
@@ -219,4 +218,3 @@ class TestAccountService(TestCase):
         resp = self.client.delete(BASE_URL)
         # assert that the resp.status_code is status.HTTP_405_METHOD_NOT_ALLOWED
         self.assertEqual(resp.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
-
